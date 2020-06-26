@@ -4,6 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI.Views"
+        mc:Ignorable="d" FontSize="20" 
+        Title="ShellView" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- I can do x:Name="People" but if there is another combo box
+        named People, I can do -> ItemsSource="{Binding People}"-->
+        <ComboBox Grid.Row="0" x:Name="People" SelectedItem="{Binding SelectedPerson}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullName}"/>
+                        <TextBlock Text=" - Are they alive: "/>
+                        <CheckBox VerticalAlignment="Center"
+                                  IsChecked="{Binding IsAlive}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox Grid.Row="1" x:Name="SelectedPerson_Addresses" 
+                  SelectedItem="{Binding SelectedAddress}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullAddress}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock x:Name="SelectedAddress_FullAddress" Grid.Row="2"/>
+    </Grid>
+</Window>
+
+<!-- we can add this the following to notify of changing
+        xmlns:cal="http://www.caliburnproject.org"   <- add this to Window above
+        cal:Message.Attach="[Event SelectionChanged] = [Action MyMethod()]" -->
+    
+<!-- old code
+    <Window x:Class="WPFUI.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI.Views"
         mc:Ignorable="d" FontSize="18"
         Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -26,34 +76,35 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <!-- Row 1 -->
+
+         Row 1 
         <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" 
                    Grid.Row="1" Grid.Column="1"
                    Grid.ColumnSpan="2"></TextBlock>
-        <!-- Row 2 -->
+         Row 2 
         <TextBox  x:Name="FirstName"  MinWidth="100" 
                   Grid.Row="2" Grid.Column="1"></TextBox>
         <TextBox  x:Name="LastName"  MinWidth="100" 
                   Grid.Row="2" Grid.Column="2"></TextBox>
-        <!-- Row 3 -->
+         Row 3 
         <ComboBox x:Name="People" Grid.Row="3" Grid.Column="1" 
                   SelectedItem="{Binding Path=SelectedPerson, Mode=OneWayToSource}"
                   DisplayMemberPath="FirstName"/>
         <TextBlock x:Name="SelectedPerson_LastName" 
                    Grid.Row="3" Grid.Column="2"/>
         
-        <!-- Row 4 -->
+        Row 4
         <Button x:Name="ClearText" Grid.Row="4" Grid.Column="1">
             Clear Names
         </Button>
         
-        <!-- Row 5 -->
+        Row 5
         <Button x:Name="LoadPageOne" Grid.Row="5"
                 Grid.Column="1">Load First Page</Button>
         <Button x:Name="LoadPageTwo" Grid.Row="5"
                 Grid.Column="2">Load Second Page</Button> 
-        <!-- Row 6 -->
+         Row 6 
         <ContentControl  x:Name="ActiveItem" Grid.Row="6"
                          Grid.Column="1" Grid.ColumnSpan="5"/>
     </Grid>
-</Window>
+</Window> -->
