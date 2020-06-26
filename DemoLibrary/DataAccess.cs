@@ -31,7 +31,8 @@ namespace DemoLibrary
             return output;
         }
 
-        private PersonModel GetPerson(int id)
+        //it was private we change it to public for ItemsControl lesson
+        public PersonModel GetPerson(int id) 
         {
             PersonModel output = new PersonModel();
 
@@ -63,7 +64,8 @@ namespace DemoLibrary
 
             return output;
         }
-        private T GetRandomItem<T>(T[] data)
+        //it was private we change it to public for ItemsControl lesson
+        public T GetRandomItem<T>(T[] data)
         {
             return data[rnd.Next(0, data.Length)];
         }
